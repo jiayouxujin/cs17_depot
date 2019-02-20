@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from predict_site import models
 from predict_site.form import UserForm
-from predict_site.models import Users
+from predict_site.models import Users, StuScore
 
 
 def home(request):
@@ -41,5 +41,8 @@ def login(request):
     return render(request, 'login.html', locals())
 
 def scorepredict(request):
-    return render(request,'scorepredict.html')
+    user_logged = Users.objects.get(stu_no=request.session['user_stu_no'])
+    user_predictscore=StuScore.objects.get(stu_no=request.session['user_stu_no'])
+    return render(request, 'scorepredict.html',
+                  {'user': user_logged, 'portrait': '/static/user_portrait/portrait' + user_logged.stu_no + '.png','predictscore':user_predictscore})
 

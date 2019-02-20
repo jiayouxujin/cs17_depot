@@ -1,10 +1,151 @@
-<!DOCTYPE html>
+<!doctype html>
+{% load staticfiles %}
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>成绩预测</title>
-</head>
-<body>
-<h1>这里是成绩预测界面</h1>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <title>ScorePredict--score</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts-en.common.min.js"></script>
+  </head>
+
+  <body>
+    <!--顶部导航栏-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#">ScorePredict</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="home.html\">首页<span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+        </div>
+    </nav>
+
+    <!--主页面-->
+    <div class="top">
+        <div class="row">
+            <!--个人信息-->
+            <div class="col-3">
+                <p>&nbsp;</p>
+                <div class="jumbotron jumbotron-fluid" style="background-color: rgba(192,192,192,0.1)">
+                    <div class="container">
+                        <img src="{{ portrait }}" class="rounded mx-auto d-block" alt="..." style="width: 100px;height: 100px;float: left">
+                        <br><p>&nbsp;</p><p>&nbsp;</p>
+                        <h1 class="display-6">欢迎，{{ user.username }}</h1>
+                        <p class="lead"><strong>姓名:</strong> {{ user.name }}</p>
+                        <p class="lead"><strong>专业:</strong> {{ user.major }}</p>
+                        <p class="lead"><strong>个性签名:</strong> {{ user.status }}</p>
+                    </div>
+                </div>
+                <p>&nbsp;</p><br>
+            </div>
+            <!--右侧主要功能板块-->
+            <div class="main-predict-function">
+                <br> <br>
+                <div class="function" style="border: lightgray solid;margin-top: 50px">
+                    <p>
+                        我们将各科知识点联系起来，发现一些科目之间有一点的关联性
+                    </p>
+                    <p>
+                        通过您的高等数学、大学物理、线性代数预测你的离散数学的成绩
+                    </p>
+                </div>
+                <br> <br>
+                <!--成绩预测卡片-->
+                <div class="Card" id="div-card" style="float: right;border: lightgray solid">
+                    <!--下拉框板块-->
+                    <div class="dropdown" >
+                        <h1 style="font-family: 'Microsoft YaHei UI';font-size: 150%">
+                            预测科目:
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    离散数学
+                                </button>
+{#                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">#}
+{#                                    <a class="dropdown-item" id="dropdown-menu-Amath" href="#" role="tab">高等数学</a>#}
+{#                                    <a class="dropdown-item" id="dropdown-menu-Lalg" href="#" role="tab">线性代数</a>#}
+{#                                    <a class="dropdown-item" id="dropdown-menu-Uphy" href="#" role="tab">大学物理</a>#}
+{#                                    <a class="dropdown-item" id="dropdown-menu-Gai" href="#" role="tab">概率论</a>#}
+{#                                </div>#}
+                        </h1>
+                    </div>
+                    <!--卡片正文-->
+                    <div class="card-DiscreteMath" style="width:400px;height: 400px" align="center">
+                        <br> <br>
+                        <div class="card-body">
+                            <h5 class="card-title">ScorePredict Card</h5>
+                        </div>
+                        <ul class="list-group list-group-flush" >
+                            <li class="list-group-item">预测得分：{{ predictscore.score_predict }}</li>
+                            <li class="list-group-item">实际得分：{{ predictscore.score_actual }}</li>
+                            <li class="list-group-item">预测准确率：{{ predictscore.predict_accuracy_rating }}</li>
+                            <p class="card-text">加油，你是最棒的</p>
+                        </ul>
+                    </div>
+                </div>
+                <!--雷达图,暂时用柱状图代码放在这儿了-->
+                <div class="radar" id="div-radar" style="float: left;">
+                    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                    <div id="container" style="width: 500px;height:500px;"></div>
+                    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+                    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+                    <script type="text/javascript">
+                        var dom = document.getElementById("container");
+                        var myChart = echarts.init(dom);
+                        var app = {};
+                        option = null;
+                        option = {
+                            title: {
+                                text: '成绩预测雷达图'
+                            },
+                            tooltip: {
+                                trigger: 'axis'
+                            },
+                            legend: {
+                                x: 'center',
+                                data:['科目']
+                            },
+                            radar: [
+                                {
+                                    indicator: [
+                                        {text: '高数', max: 100},
+                                        {text: '离散', max: 100},
+                                        {text: '大物', max: 100},
+                                        {text: '线代', max: 100}
+                                        ],
+                                    center: ['50%','50%'],
+                                    radius:150
+                                },
+                                ],
+                            series: [
+                                {
+                                    type: 'radar',
+                                    tooltip: {
+                                        trigger: 'item'
+                                    },
+                                    itemStyle: {normal: {areaStyle: {type: 'default'}}},
+                                    data: [
+                                        {
+                                            value: [{{ user.Amath }},{{ predictscore.score_actual }},{{ user.Uphy }},{{ user.Lalg }}],
+                                            name: '科目'
+                                        }
+                                        ]
+                                },
+                                ]
+                        };
+                        ;
+                        if (option && typeof option === "object") {
+                            myChart.setOption(option, true);
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Bootstrap依赖-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 </body>
 </html>
