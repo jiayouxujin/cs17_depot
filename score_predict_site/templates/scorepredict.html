@@ -9,26 +9,49 @@
     <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts-en.common.min.js"></script>
   </head>
 
-  <body>
-    <!--顶部导航栏-->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <a class="navbar-brand" href="#">ScorePredict</a>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <body style="background-color: #F7F8FA">
+  <!--顶部导航栏-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="#">ScorePredict</a>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="home.html\">首页<span class="sr-only">(current)</span></a>
-            </li>
+              <li class="nav-item active">
+                  <a class="nav-link" href="#">首页 <span class="sr-only">(current)</span></a>
+              </li>
           </ul>
+           <!-- Navbar Right Menu -->
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <!-- User Account Menu -->
+          <li class="dropdown user user-menu">
+            <!-- Menu Toggle Button -->
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding-right: 40px;" >
+              <!-- The user image in the navbar-->
+              <img src="{{ portrait }}" class="user-image" alt="User Image" style="width: 25px;height: 25px; ">
+            </a>
+             <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="width: 25px">
+          <a class="dropdown-item" href="#">About</a>
+          <a class="dropdown-item" href="#">Help</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="\login">Sign Out</a>
         </div>
-    </nav>
+          </li>
+        </ul>
+      </div>
+          <span style="color: gray ">
+              <a href="\login">Sign Out</a>
+          </span>
+      </div>
+  </nav>
 
     <!--主页面-->
     <div class="top">
         <div class="row">
             <!--个人信息-->
-            <div class="col-3">
+            <div class="col-3" style="background-color: #FFFFFF">
                 <p>&nbsp;</p>
-                <div class="jumbotron jumbotron-fluid" style="background-color: rgba(192,192,192,0.1)">
+                <div class="jumbotron jumbotron-fluid" style="background-color: #FFFFFF" >
                     <div class="container">
                         <img src="{{ portrait }}" class="rounded mx-auto d-block" alt="..." style="width: 100px;height: 100px;float: left">
                         <br><p>&nbsp;</p><p>&nbsp;</p>
@@ -43,17 +66,17 @@
             <!--右侧主要功能板块-->
             <div class="main-predict-function">
                 <br> <br>
-                <div class="function" style="border: lightgray solid;margin-top: 50px">
-                    <p>
-                        我们将各科知识点联系起来，发现一些科目之间有一点的关联性
+                <div class="function" style="border: lightgray ;margin-top: 50px;background: linear-gradient(to top right, #f3f8ff, #deecff, #c6cfff);padding: 25px;">
+                    <p style="padding-left: 180px;">
+                                     我们将各科知识点联系起来，发现一些科目之间有一点的关联性
                     </p>
-                    <p>
-                        通过您的高等数学、大学物理、线性代数预测你的离散数学的成绩
+                    <p style="padding-left: 180px;">
+                                      通过您的高等数学、大学物理、线性代数预测你的离散数学的成绩
                     </p>
                 </div>
                 <br> <br>
                 <!--成绩预测卡片-->
-                <div class="Card" id="div-card" style="float: right;border: lightgray solid">
+                <div class="Card" id="div-card" style="float: right;border: lightgray ;background-color: #FFFFFF;padding: 10px">
                     <!--下拉框板块-->
                     <div class="dropdown" >
                         <h1 style="font-family: 'Microsoft YaHei UI';font-size: 150%">
