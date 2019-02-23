@@ -15,22 +15,46 @@
 </head>
 <body>
 
+<!--顶部导航栏-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <a class="navbar-brand" href="#">ScorePredict</a>
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="/home/">首页<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#">首页 <span class="sr-only">(current)</span></a>
             </li>
         </ul>
+        <!-- Navbar Right Menu -->
+        <div class="navbar-custom-menu" style="position: absolute;right: 40px;top: 5px;">
+            <ul class="nav navbar-nav">
+                <!-- User Account Menu -->
+                <li class="dropdown user user-menu">
+                    <!-- Menu Toggle Button -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding-right: 40px;" >
+                        <!-- The user image in the navbar-->
+                        <img src="{{ portrait }}" class="user-image" alt="User Image" style="width: 25px;height: 25px; ">
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="width: 25px">
+                        <a class="dropdown-item" href="#">About</a>
+                        <a class="dropdown-item" href="#">Help</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="\login">Sign Out</a>
+                    </div>
+                </li>
+            </ul>
+        </div >
+        <span style="color: gray ">
+              <a href="\login" style="position: absolute;top: 20px;right: 5px;">Sign Out</a>
+          </span>
     </div>
 </nav>
 
-<div class="row">
+<div class="row" style="background-color: #F7F8FA">
     <!--个人信息-->
-    <div class="col-3">
+    <div class="col-3" style="background-color: #ffffff">
         <p>&nbsp;</p>
-        <div class="jumbotron jumbotron-fluid" style="background-color: rgba(192,192,192,0.1)">
+        <div class="jumbotron jumbotron-fluid" style="background-color: #ffffff">
             <div class="container">
                 <img src="{{ portrait }}" class="rounded mx-auto d-block" alt="..." style="width: 100px;height: 100px;float: left">
                 <br><p>&nbsp;</p><p>&nbsp;</p>
@@ -42,16 +66,16 @@
         </div>
         <p>&nbsp;</p><br>
     </div>
-    <div class="col-9">
-        <div class="jumbotron jumbotron-fluid" style="background-color: rgba(192,192,192,0.1)">
-            <div class="container">
+    <div class="col-9" style="background-color: #F7F8FA;">
+        <div class="jumbotron jumbotron-fluid" style="background-color: #F7F8FA">
+            <div class="container" style="background-color: #F7F8FA">
                 <p>&nbsp;</p>
                 <div class="row">
                     <div class="col-3"></div>
                     <div class="col-3">
                         <p>&nbsp;</p><a href="/scorepredict/"  style="color:black;text-decoration:none;">
                         <div class="card-group">
-                            <div class="card" align="middle" style="background-color: rgba(0,0,0,0);border: none">
+                            <div class="card" align="middle" style="background-color: rgba(0,0,0,0);border: lightgray;">
                                 <img src="{% static "icon/score_predict_icon.png" %}" class="card-img-top" alt="..." style="width: 100px;height: 100px">
                                 <div class="card-body">
                                     <h5 class="card-title">成绩预测</h5>
