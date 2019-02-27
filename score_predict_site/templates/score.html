@@ -1,155 +1,119 @@
 <!doctype html>
 {% load staticfiles %}
+{% block css %}<link href="{% static 'CSS/AdminLTE.css' %}" rel="stylesheet"/>{% endblock %}
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../static/CSS/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/CSS/skin-blue.min.css">
 
-
-    <meta charset="utf-8">
-    <title>ScorePredict--score</title>
-    <link rel="stylesheet" type="text/css" href="http://unpkg.com/iview/dist/styles/iview.css">
-    <script type="text/javascript" src="http://vuejs.org/js/vue.min.js"></script>
-    <script type="text/javascript" src="http://unpkg.com/iview/dist/iview.min.js"></script>
+    <title>主页</title>
 </head>
-<body>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <header class="main-header">
+        <a class="logo">
+            <span class="logo-mini">
+                <b>个人中心</b>
+            </span>
+            <span class="logo-lg">
+                <b>个人中心</b>
+            </span>
+        </a>
 
-<!--顶部导航栏-->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand" href="#" style="position: absolute;top: 10px;font-size: large;">ScorePredict</a>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="home.html\" style="position: absolute;top: 0px;left: 150px;font-size:15px;">首页<span class="sr-only">(current)</span></a>
-            </li>
-        </ul>
-         <!-- Navbar Right Menu -->
-        <div class="navbar-custom-menu" style="position: absolute;right: 40px;top: 0px;">
-            <ul class="nav navbar-nav">
-                <!-- User Account Menu -->
-                <li class="dropdown user user-menu">
-                    <!-- Menu Toggle Button -->
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding-right: 40px;" >
-                        <!-- The user image in the navbar-->
-                        <img src="{{ portrait }}" class="user-image" alt="User Image" style="width: 25px;height: 25px; ">
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="width: 25px">
-                        <a class="dropdown-item" href="#">About</a>
-                        <a class="dropdown-item" href="#">Help</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="\login">Sign Out</a>
-                    </div>
-                </li>
-            </ul>
-        </div >
-        <span style="color: gray ">
-              <a href="\login" style="position: absolute;top: 15px;right: 5px; font-size: 15px;">Sign Out</a>
-          </span>
-    </div>
-</nav>
+        {#        顶部导航栏#}
+        <nav class="navbar " role="navigation">
+            <img src="{% static "icon/nav_icon.png" %}" class="sidebar-toggle" data-toggle="push-menu" role="button">
 
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="{{ portrait }}" class="user-image" alt="User Image">
+                            <span class="hidden-xs">{{ user.name }}</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="user-header">
+                                <img src="{{ portrait }}" class="img-circle" alt="User Image">
+                                <p>{{ user.name }}</p>
+                            </li>
 
-
-<div class="row">
-    <!--个人信息-->
-    <div class="col-3">
-        <p>&nbsp;</p>
-        <div class="jumbotron jumbotron-fluid" style="background-color: rgba(192,192,192,0.1)">
-            <div class="container">
-                <img src="{{ portrait }}" class="rounded mx-auto d-block" alt="..." style="width: 100px;height: 100px;float: left">
-                <br><p>&nbsp;</p><p>&nbsp;</p>
-                <h1 class="display-6">欢迎，{{ user.username }}</h1>
-                <p class="lead"><strong>姓名:</strong> {{ user.name }}</p>
-                <p class="lead"><strong>专业:</strong> {{ user.major }}</p>
-                <p class="lead"><strong>个性签名:</strong> {{ user.status }}</p>
+                            <li class="user-footer">
+                                <div>
+                                    <a href="/login" class="btn btn-default btn-block">Sign out</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
-        </div>
-        <p>&nbsp;</p><br>
-    </div>
-    <!-- /#sidebar-wrapper -->
+        </nav>
+    </header>
 
-    <!-- Page Content -->
-    <div class="col-9">
-        <div class="jumbotron jumbotron-fluid" style="background-color: rgba(192,192,192,0.1)">
-            <div class="container">
-                <p>&nbsp;</p>
-                <div class="row">
-                    <div class="col-4">
-                        <div class="list-group" id="list-tab" role="tablist">
-                            <a class="list-group-item list-group-item-action active" id="list-Uphy-list" data-toggle="list" href="#list-Uphy" role="tab" aria-controls="Uphy">大学物理<span class="badge badge-primary badge-pill">{{ user.Uphy}}</span></a>
-                            <a class="list-group-item list-group-item-action" id="list-Amath-list" data-toggle="list" href="#list-Amath" role="tab" aria-controls="Amath">高等数学<span class="badge badge-primary badge-pill">{{ user.Amath }}</span></a>
-                            <a class="list-group-item list-group-item-action" id="list-Lalg-list" data-toggle="list" href="#list-Lalg" role="tab" aria-controls="Lalg">线性代数<span class="badge badge-primary badge-pill">{{ user.Lalg }}</span></a>
-                            <a class="list-group-item list-group-item-action" id="list-C-list" data-toggle="list" href="#list-C" role="tab" aria-controls="C">C语言<span class="badge badge-primary badge-pill">{{ user.C }}</span></a>
-                        </div>
-                    </div>
-                    <div class="col-8">
-                        <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="list-Uphy" role="tabpanel" aria-labelledby="list-Uphy-list">
-                                <h1 align="center">大学物理</h1><p></p>>
-                                <p style="text-indent:2em">本书涵盖了教育部新制定的《非物理类理工学科大学物理课程教学基本要求》中的核心内容，并精选了相当数量的拓展内容.
-                                    本书在修订过程中继承了第1版的特色，采取压缩经典、简化近代、突出重点的方法精选和组织内容.
-                                </p>
-                                <p style="text-indent:2em">全书共13章，涉及力学、热学、电磁学、振动和波、波动光学、狭义相对论和量子物理基础等.
-                                    每章包括基本内容之外，还包括阅读材料、复习与小结、练习题. 内容深浅适当，讲解正确清晰，
-                                    叙述引人入胜，例题指导详尽，全书联系实际，特别是注意介绍物理知识和物理思想在实际中的应用.
-                                    本书有电子教材和学习辅导书等配套资料.
-                                </p>
-                            </div>
-
-                            <div class="tab-pane fade" id="list-Amath" role="tabpanel" aria-labelledby="list-Amath-list">
-                                <h1 align="center">高等数学</h1><p></p>>
-                                <p style="text-indent:2em">指相对于初等数学而言，数学的对象及方法较为繁杂的一部分。
-                                </p>
-                                <p style="text-indent:2em">广义地说，初等数学之外的数学都是高等数学，也有将中学较深入的代数、几何以及简单的集合论初步、逻辑初步称为中等数学的 ，
-                                    将其作为中小学阶段的初等数学与大学阶段的高等数学的过渡。 通常认为，高等数学是由微积分学，较深入的代数学、几何学以及它们之间的交叉内容所形成的一门基础学科。
-                                    主要内容包括：数列、极限、微积分、空间解析几何与线性代数、级数、常微分方程。 工科、理科、财经类研究生考试的基础科目。
-                                </p>
-                            </div>
-                            <div class="tab-pane fade" id="list-Lalg" role="tabpanel" aria-labelledby="list-Lalg-list">
-                                <h1 align="center">线性代数</h1><p></p>>
-                                <p style="text-indent:2em">线性代数是数学的一个分支，它的研究对象是向量，向量空间（或称线性空间），线性变换和有限维的线性方程组。
-                                </p>
-                                <p style="text-indent:2em">向量空间是现代数学的一个重要课题；因而，线性代数被广泛地应用于抽象代数和泛函分析中；通过解析几何，线性代数得以被具体表示。
-                                    线性代数的理论已被泛化为算子理论。由于科学研究中的非线性模型通常可以被近似为线性模型，使得线性代数被广泛地应用于自然科学和社会科学中。
-                                </p>
-                            </div>
-                            <div class="tab-pane fade" id="list-C" role="tabpanel" aria-labelledby="list-C-list">
-                                <h1 align="center">c语言</h1><p></p>>
-                                <p style="text-indent:2em">C语言是一门通用计算机编程语言，广泛应用于底层开发。
-                                    C语言的设计目标是提供一种能以简易的方式编译、处理低级存储器、产生少量的机器码以及不需要任何运行环境支持便能运行的编程语言。
-                                </p>
-                                <p style="text-indent:2em">二十世纪八十年代，为了避免各开发厂商用的C语言语法产生差异，由美国国家标准局为C语言制定了一套完整的美国国家标准语法，称为ANSI C，作为C语言最初的标准。
-                                    目前2011年12月8日，国际标准化组织（ISO）和国际电工委员会（IEC）发布的C11标准是C语言的第三个官方标准，也是C语言的最新标准，该标准更好的支持了汉字函数名和汉字标识符，
-                                    一定程度上实现了汉字编程。
-                                </p></div>
-                        </div>
-                    </div>
+    <aside class="main-sidebar">
+        <section class="sidebar">
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="{{ portrait }}" class="img-circle" alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <p>{{ user.name }}</p>
                 </div>
             </div>
-        </div>
+
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="header" style="color: white">Welcome</li>
+                <p class="lead" style="color: white;"><strong>姓 名  </strong> {{ user.name }}</p>
+                <p class="lead" style="color: white;"><strong>专 业  </strong> {{ user.major }}</p>
+                <p class="lead" style="color: white;"><strong>签 名  </strong> {{ user.status }}</p>
+            </ul>
+        </section>
+    </aside>
+    <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Welcome Back
+      </h1>
+    </section>
+
+    <!-- Main content -->
+    <div class="content container-fluid" style="padding-top: 100px">
+        <ul class="list-group" >
+            <li class="list-group-item d-flex justify-content-between align-items-center" style="text-align: center">
+                大学物理
+                <span class="badge badge-primary badge-pill">{{ user.Uphy }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center"style="text-align: center">
+                高等数学
+                <span class="badge badge-primary badge-pill">{{ user.Amath }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center"style="text-align: center">
+                线性代数
+                <span class="badge badge-primary badge-pill">{{ user.Lalg }}</span>
+            </li>
+             <li class="list-group-item d-flex justify-content-between align-items-center"style="text-align: center">
+                c语言
+                <span class="badge badge-primary badge-pill">{{ user.C }}</span>
+            </li>
+        </ul>
     </div>
+  </div>
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2019 <a href="#">Company</a>.</strong> All rights reserved.
+  </footer>
+
 </div>
-
-<!-- /#wrapper -->
-
-<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
-<script src="http://www.jq22.com/jquery/bootstrap-3.3.4.js"></script>
-<script type="text/javascript" src="../static/assets/js/slide.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="../static/JS/adminlte.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 </body>
 </html>

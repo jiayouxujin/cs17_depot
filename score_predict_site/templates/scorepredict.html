@@ -1,77 +1,97 @@
 <!doctype html>
 {% load staticfiles %}
+{% block css %}<link href="{% static 'CSS/AdminLTE.css' %}" rel="stylesheet"/>{% endblock %}
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <title>ScorePredict--score</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts-en.common.min.js"></script>
-  </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/CSS/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/CSS/skin-blue.min.css">
 
-  <body style="background-color: #F7F8FA">
-  <!--顶部导航栏-->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <a class="navbar-brand" href="#">ScorePredict</a>
+    <title>主页</title>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <header class="main-header">
+        <a class="logo">
+            <span class="logo-mini">
+                <b>个人中心</b>
+            </span>
+            <span class="logo-lg">
+                <b>个人中心</b>
+            </span>
+        </a>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                  <a class="nav-link" href="#">首页 <span class="sr-only">(current)</span></a>
-              </li>
-          </ul>
-           <!-- Navbar Right Menu -->
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <!-- User Account Menu -->
-          <li class="dropdown user user-menu">
-            <!-- Menu Toggle Button -->
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding-right: 40px;" >
-              <!-- The user image in the navbar-->
-              <img src="{{ portrait }}" class="user-image" alt="User Image" style="width: 25px;height: 25px; ">
-            </a>
-             <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="width: 25px">
-          <a class="dropdown-item" href="#">About</a>
-          <a class="dropdown-item" href="#">Help</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="\login">Sign Out</a>
-        </div>
-          </li>
-        </ul>
-      </div>
-          <span style="color: gray ">
-              <a href="\login">Sign Out</a>
-          </span>
-      </div>
-  </nav>
+        {#        顶部导航栏#}
+        <nav class="navbar " role="navigation">
+            <img src="{% static "icon/nav_icon.png" %}" class="sidebar-toggle" data-toggle="push-menu" role="button">
 
-    <!--主页面-->
-    <div class="top">
-        <div class="row">
-            <!--个人信息-->
-            <div class="col-3" style="background-color: #FFFFFF">
-                <p>&nbsp;</p>
-                <div class="jumbotron jumbotron-fluid" style="background-color: #FFFFFF" >
-                    <div class="container">
-                        <img src="{{ portrait }}" class="rounded mx-auto d-block" alt="..." style="width: 100px;height: 100px;float: left">
-                        <br><p>&nbsp;</p><p>&nbsp;</p>
-                        <h1 class="display-6">欢迎，{{ user.username }}</h1>
-                        <p class="lead"><strong>姓名:</strong> {{ user.name }}</p>
-                        <p class="lead"><strong>专业:</strong> {{ user.major }}</p>
-                        <p class="lead"><strong>个性签名:</strong> {{ user.status }}</p>
-                    </div>
-                </div>
-                <p>&nbsp;</p><br>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="{{ portrait }}" class="user-image" alt="User Image">
+                            <span class="hidden-xs">{{ user.name }}</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="user-header">
+                                <img src="{{ portrait }}" class="img-circle" alt="User Image">
+                                <p>{{ user.name }}</p>
+                            </li>
+
+                            <li class="user-footer">
+                                <div>
+                                    <a href="/login" class="btn btn-default btn-block">Sign out</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
-            <!--右侧主要功能板块-->
-            <div class="main-predict-function">
+        </nav>
+    </header>
+
+    <aside class="main-sidebar">
+        <section class="sidebar">
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="{{ portrait }}" class="img-circle" alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <p>{{ user.name }}</p>
+                </div>
+            </div>
+
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="header" style="color: white">Welcome</li>
+                <p class="lead" style="color: white;"><strong>姓 名  </strong> {{ user.name }}</p>
+                <p class="lead" style="color: white;"><strong>专 业  </strong> {{ user.major }}</p>
+                <p class="lead" style="color: white;"><strong>签 名  </strong> {{ user.status }}</p>
+            </ul>
+        </section>
+    </aside>
+    <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Welcome Back
+      </h1>
+    </section>
+
+    <!-- Main content -->
+    <div class="content container-fluid">
+		<div class="main-predict-function">
                 <br> <br>
-                <div class="function" style="border: lightgray ;margin-top: 50px;background: linear-gradient(to top right, #f3f8ff, #deecff, #c6cfff);padding: 25px;">
-                    <p style="padding-left: 180px;">
-                                     我们将各科知识点联系起来，发现一些科目之间有一点的关联性
+                <div class="function" style="border: lightgray ;background: linear-gradient(to top right, #f3f8ff, #deecff, #c6cfff);padding: 25px;">
+                    <p style="text-align: center">
+                                     我们将各科知识点联系起来，发现一些科目之间有一点的<strong>关联性</strong>
                     </p>
-                    <p style="padding-left: 180px;">
-                                      通过您的高等数学、大学物理、线性代数预测你的离散数学的成绩
+                    <p style="text-align: center">
+                                      通过您的高等数学、大学物理、线性代数预测你的<strong>离散数学的成绩</strong>
                     </p>
                 </div>
                 <br> <br>
@@ -165,10 +185,14 @@
             </div>
         </div>
     </div>
+  </div>
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2019 <a href="#">Company</a>.</strong> All rights reserved.
+  </footer>
 
-    <!--Bootstrap依赖-->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="../static/JS/adminlte.js"></script>
 </body>
 </html>

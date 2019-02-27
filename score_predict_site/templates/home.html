@@ -18,16 +18,16 @@
     <header class="main-header">
         <a class="logo">
             <span class="logo-mini">
-                <b>首页</b>
+                <b>个人中心</b>
             </span>
             <span class="logo-lg">
-                <b>首页</b>
+                <b>个人中心</b>
             </span>
         </a>
 
         {#        顶部导航栏#}
         <nav class="navbar " role="navigation">
-                <img src="{% static "icon/nav_icon.png" %}" class="sidebar-toggle" data-toggle="push-menu" role="button">
+            <img src="{% static "icon/nav_icon.png" %}" class="sidebar-toggle" data-toggle="push-menu" role="button">
 
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
@@ -66,82 +66,81 @@
             </div>
 
             <ul class="sidebar-menu" data-widget="tree">
-                <li class="header">Welcome</li>
-                <p class="lead"><strong>姓名:</strong> {{ user.name }}</p>
-                <p class="lead"><strong>专业:</strong> {{ user.major }}</p>
-                <p class="lead"><strong>个性签名:</strong> {{ user.status }}</p>
+                <li class="header" style="color: white">Welcome</li>
+                <p class="lead" style="color: white;"><strong>姓 名  </strong> {{ user.name }}</p>
+                <p class="lead" style="color: white;"><strong>专 业  </strong> {{ user.major }}</p>
+                <p class="lead" style="color: white;"><strong>签 名  </strong> {{ user.status }}</p>
             </ul>
         </section>
     </aside>
+    <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Welcome Back
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="/student" name="tea_home"><i class="fa fa-dashboard"></i> Home</a></li>
+      </ol>
+    </section>
 
-    <div class="content-wrapper">
-        <section class="content-header">
-            <h1>
-                欢迎回来
-                <small>我们为您提供一下服务</small>
-            </h1>
-            <ol class="breadcrumb">
-                <li><a href="/student" name="tea_home"><i class="fa fa-dashboard"></i> Home</a></li>
-            </ol>
-        </section>
-        <!-- Main content -->
-        <div class="content container-fluid" style="padding-top: 100px">
-            <div class="col-3"></div>
-            <div class="col-3">
-                <p>&nbsp;</p><a href="/scorepredict/"  style="color:black;text-decoration:none;">
-                <div class="card-group">
-                    <div class="card" align="middle" style="background-color: rgba(0,0,0,0);border: lightgray;">
-                        <img src="{% static "icon/score_predict_icon.png" %}" class="card-img-top" alt="..." style="width: 100px;height: 100px">
-                        <div class="card-body">
-                            <h5 class="card-title">成绩预测</h5>
-                            <button type="button" class="btn btn-default">你有几科比较凉</button>
-                        </div>
-                    </div>
-                </div></a>
+    <!-- Main content -->
+    <div class="content container-fluid" style="padding-top: 100px">
+		<div class="col-md-4" style="text-align: center">
+			 <p>&nbsp;</p><a href="/scorepredict/"  style="color:black;text-decoration:none;">
+                        <div class="card-group">
+                            <div class="card" align="middle" style="border: lightgray;">
+                                <img src="{% static "icon/score_predict_icon.png" %}" class="card-img-top" alt="..." style="width: 100px;height: 100px">
+                                <div class="card-body">
+                                    <h5 class="card-title">成绩预测</h5>
+                                    <button type="button" class="btn btn-default">你有几科比较凉</button>
+                                </div>
+                            </div>
+                        </div></a>
+		</div>
+		<div class="col-md-4" style="text-align: center;">
+			<p>&nbsp;</p><a href="/course_relevance/"  style="color:black;text-decoration:none;">
+                        <div class="card-group">
+                            <div class="card" align="middle" style="background-color: rgba(0,0,0,0);border: none">
+                                <img src="{% static "icon/dependency_analyse_icon.png" %}" class="card-img-top" alt="..." style="width: 100px;height: 100px">
+                                <div class="card-body">
+                                    <h5 class="card-title">相关性分析</h5>
+                                    <button type="button" class="btn btn-default">你以为会不凉？？</button>
+                                </div>
+                            </div>
+                        </div></a>
 
-                <p>&nbsp;</p><a href="/course_relevance/"  style="color:black;text-decoration:none;">
-                <div class="card-group">
-                    <div class="card" align="middle" style="background-color: rgba(0,0,0,0);border: none">
-                        <img src="{% static "icon/dependency_analyse_icon.png" %}" class="card-img-top" alt="..." style="width: 100px;height: 100px">
-                        <div class="card-body">
-                            <h5 class="card-title">相关性分析</h5>
-                            <button type="button" class="btn btn-default">你以为会不凉？？</button>
-                        </div>
-                    </div>
-                </div></a>
-            </div>
+            <div style="padding: 20px"></div>
+            <p>&nbsp;</p><a href="/score/"  style="color:black;text-decoration:none;">
+                        <div class="card-group">
+                            <div class="card" align="middle" style="background-color: rgba(0,0,0,0);border: none">
+                                <img src="{% static "icon/course_socre_icon.png" %}" class="card-img-top" alt="..." style="width: 100px;height: 100px">
+                                <div class="card-body">
+                                    <h5 class="card-title">所修课程成绩</h5>
+                                    <button type="button" class="btn btn-default">已经凉了呀</button>
+                                </div>
+                            </div>
+                        </div></a>
+		</div>
+		<div class="col-md-4" style="text-align: center">
+              <p>&nbsp;</p><a href="#"  style="color:black;text-decoration:none;">
+                        <div class="card-group">
+                            <div class="card" align="middle" style="background-color: rgba(0,0,0,0);border: none">
+                                <img src="{% static "icon/course_key_icon.png" %}" class="card-img-top" alt="..." style="width: 100px;height: 100px">
+                                <div class="card-body">
+                                    <h5 class="card-title">课程重点</h5>
+                                    <button type="button" class="btn btn-default">按照这个复习就不凉了</button>
+                                </div>
+                            </div>
+                        </div></a>
+		</div>
+    </div>
+  </div>
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2019 <a href="#">Company</a>.</strong> All rights reserved.
+  </footer>
 
-            <div class="col-3">
-                <p>&nbsp;</p><a href="#"  style="color:black;text-decoration:none;">
-                <div class="card-group">
-                    <div class="card" align="middle" style="background-color: rgba(0,0,0,0);border: none">
-                        <img src="{% static "icon/course_key_icon.png" %}" class="card-img-top" alt="..." style="width: 100px;height: 100px">
-                        <div class="card-body">
-                            <h5 class="card-title">课程重点</h5>
-                            <button type="button" class="btn btn-default">按照这个复习就不凉了</button>
-                        </div>
-                    </div>
-                </div></a>
-
-                <p>&nbsp;</p><a href="/score/"  style="color:black;text-decoration:none;">
-                <div class="card-group">
-                    <div class="card" align="middle" style="background-color: rgba(0,0,0,0);border: none">
-                        <img src="{% static "icon/course_socre_icon.png" %}" class="card-img-top" alt="..." style="width: 100px;height: 100px">
-                        <div class="card-body">
-                            <h5 class="card-title">所修课程成绩</h5>
-                            <button type="button" class="btn btn-default">已经凉了呀</button>
-                        </div>
-                    </div>
-                </div></a>
-
-            </div><div class="col-3"></div>
-
-        </div>
-<footer class="main-footer">
-    <strong>Copyright &copy; 2018 <a href="#">Company</a>.</strong> All rights reserved.
-</footer>
-</div>
-</div>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
