@@ -45,4 +45,8 @@ def scorepredict(request):
     user_predictscore=StuScore.objects.get(stu_no=request.session['user_stu_no'])
     return render(request, 'scorepredict.html',
                   {'user': user_logged, 'portrait': '/static/user_portrait/portrait' + user_logged.stu_no + '.png','predictscore':user_predictscore})
+def Classpoint_lisan(request):
+    user_logged = Users.objects.get(stu_no=request.session['user_stu_no'])
+    return render(request, 'Classpoint_lisan.html',
+                  {'user': user_logged, 'portrait': '/static/user_portrait/portrait' + user_logged.stu_no + '.png'})
 

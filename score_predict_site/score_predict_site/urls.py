@@ -24,5 +24,6 @@ urlpatterns = [
     path('login/', views.login),
     path('score/', views.score),
     path('scorepredict/',views.scorepredict),
+    path('Classpoint_lisan/', views.Classpoint_lisan),
     path('captcha', include('captcha.urls'))
 ]
