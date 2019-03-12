@@ -1,0 +1,220 @@
+<!doctype html>
+{% load staticfiles %}
+{% block css %}<link href="{% static 'CSS/AdminLTE.css' %}" rel="stylesheet"/>{% endblock %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <style type="text/css">
+        /* cytoscape graph */
+        #cy {
+            height: 1000px;
+            width: 1000px;
+
+            background-color: #f9f9f9;
+        }
+    </style>
+    <!-- Bootstrap CSS -->
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/CSS/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/CSS/skin-blue.min.css">
+
+    <title>主页</title>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <header class="main-header">
+        <a class="logo" href="/home/">
+            <span class="logo-mini">
+                <b>个人中心</b>
+            </span>
+            <span class="logo-lg">
+                <b>个人中心</b>
+            </span>
+        </a>
+
+        {#        顶部导航栏#}
+        <nav class="navbar " role="navigation">
+            <img src="{% static "icon/nav_icon.png" %}" class="sidebar-toggle" data-toggle="push-menu" role="button">
+
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="{{ portrait }}" class="user-image" alt="User Image">
+                            <span class="hidden-xs">{{ user.name }}</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="user-header">
+                                <img src="{{ portrait }}" class="img-circle" alt="User Image">
+                                <p>{{ user.name }}</p>
+                            </li>
+
+                            <li class="user-footer">
+                                <div>
+                                    <a href="/login" class="btn btn-default btn-block">Sign out</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <aside class="main-sidebar">
+        <section class="sidebar">
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="{{ portrait }}" class="img-circle" alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <p>{{ user.name }}</p>
+                </div>
+            </div>
+
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="header" style="color: white">Welcome</li>
+                <p class="lead" style="color: white;"><strong>姓 名  </strong> {{ user.name }}</p>
+                <p class="lead" style="color: white;"><strong>专 业  </strong> {{ user.major }}</p>
+                <p class="lead" style="color: white;"><strong>签 名  </strong> {{ user.status }}</p>
+            </ul>
+        </section>
+    </aside>
+    <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Welcome Back
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="/home/" name="tea_home"><i class="fa fa-dashboard"></i> Home</a></li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <div class="content container-fluid" style="padding-top: 100px">
+		<div class="container">
+        <p>&nbsp;</p>
+
+        <form action="/course_relevance/" method="post">
+        {% csrf_token %}
+
+          <div class="row">
+            <div class="col-1"></div>
+            <div class="col-5">
+                  <div class="form-group">
+                    <label for="exampleFormControlSelect1">选择第一个科目</label>
+                    <select class="form-control" id="exampleFormControlSelect1" name="course1">
+                      <option selected value="{{ course1 }}">{{ course1 }}</option>
+                      {% for course in courses_list %}
+                      <option value="{{ course.name }}">{{ course.name }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+            </div>
+            <div class="col-5">
+                  <div class="form-group">
+                    <label for="exampleFormControlSelect1">选择第二个科目</label>
+                    <select class="form-control" id="exampleFormControlSelect1" name="course2">
+                      <option selected value="{{ course2 }}">{{ course2 }}</option>
+                      {% for course in courses_list %}
+                      <option value="{{ course.name }}">{{ course.name }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+            </div>
+            <div class="col-1"></div>
+          </div>
+            <center><button type="submit" class="btn btn-info">查看</button></center>
+            <!--HTML5中不支持上面这个center标签, 需要考虑使用CSS代替, 目前我太懒……日后再改-->
+        </form>
+
+        <!--下面是关系图-->
+
+        <div id="cy"></div>
+        <!--script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script-->
+        <!--script src="http://cdn.bootcss.com/cytoscape/2.3.16/cytoscape.min.js"></script-->
+        <script src="https://cdn.bootcss.com/cytoscape/3.2.3/cytoscape.js"></script>
+        <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+        <script src="https://cdn.bootcss.com/arbor/0.91.0/arbor.js"></script>
+        <script type="text/javascript">
+        $(function(){
+            cytoscape({
+              container: document.getElementById('cy'),
+              style: [
+                { selector: 'node[label = "课程名"]',
+                  css: {'background-color': '#6FB1FC', 'content': 'data(name)'}
+                },
+                { selector: 'node[label = "章节"]',
+                  css: {'background-color': '#F5A45D', 'content': 'data(name)'}
+                },
+                { selector: 'node[label = "知识点"]',
+                  css: {'background-color': '#44A91E', 'content': 'data(name)'}
+                },
+                { selector: 'edge',
+                  //css: {'content': 'data(relationship)', 'target-arrow-shape': 'triangle'}
+                  //css: {'target-arrow-shape': 'triangle'}
+                  css: {}
+                }
+              ],
+              elements: {
+                  /*
+                  nodes: [
+                    {data: {id: '172', name: 'Tom Cruise', label: 'Person'}},
+                    {data: {id: '183', title: 'Top Gun', label: 'Movie'}}
+                    ],
+                    */
+
+                  nodes:[
+                      {% for node in nodes %}
+                          {data: {id: '{{ node.data.id }}', name: '{{node.data.name}}', label: '{{node.data.label}}'}},
+                      {% endfor %}
+                  ],
+
+                  //edges: [{data: {source: '172', target: '183', relationship: 'Acted_In'}}]
+
+                  edges:[
+                      {% for edge in edges %}
+                          {data: {source: '{{ edge.data.source }}', target: '{{ edge.data.target }}', relationship: '{{ edge.data.relationship }}'}},
+                      {% endfor %}
+                  ]
+              },
+              layout: { name: 'grid'}
+            });
+        });
+
+        options = {
+        //name: 'circle',
+        fit: true, // whether to fit the viewport to the graph
+        ready: undefined, // callback on layoutready
+        stop: undefined, // callback on layoutstop
+        rStepSize: 10, // the step size for increasing the radius if the nodes don't fit on screen
+        padding: 30, // the padding on fit
+        startAngle: 3/2 * Math.PI, // the position of the first node
+        counterclockwise: false // whether the layout should go counterclockwise (true) or clockwise (false)
+    };
+    cy.layout( options );
+        </script>
+
+        </div>
+    </div>
+  </div>
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2019 <a href="#">Company</a>.</strong> All rights reserved.
+  </footer>
+
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts-en.common.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="../static/JS/adminlte.js"></script>
+</body>
+</html>

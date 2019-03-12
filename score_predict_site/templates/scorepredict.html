@@ -1,0 +1,201 @@
+<!doctype html>
+{% load staticfiles %}
+{% block css %}<link href="{% static 'CSS/AdminLTE.css' %}" rel="stylesheet"/>{% endblock %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/CSS/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/CSS/skin-blue.min.css">
+
+    <title>主页</title>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <header class="main-header">
+        <a class="logo" href="/home/">
+            <span class="logo-mini">
+                <b>个人中心</b>
+            </span>
+            <span class="logo-lg">
+                <b>个人中心</b>
+            </span>
+        </a>
+
+        {#        顶部导航栏#}
+        <nav class="navbar " role="navigation">
+            <img src="{% static "icon/nav_icon.png" %}" class="sidebar-toggle" data-toggle="push-menu" role="button">
+
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="{{ portrait }}" class="user-image" alt="User Image">
+                            <span class="hidden-xs">{{ user.name }}</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="user-header">
+                                <img src="{{ portrait }}" class="img-circle" alt="User Image">
+                                <p>{{ user.name }}</p>
+                            </li>
+
+                            <li class="user-footer">
+                                <div>
+                                    <a href="/login" class="btn btn-default btn-block">Sign out</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <aside class="main-sidebar">
+        <section class="sidebar">
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="{{ portrait }}" class="img-circle" alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <p>{{ user.name }}</p>
+                </div>
+            </div>
+
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="header" style="color: white">Welcome</li>
+                <p class="lead" style="color: white;"><strong>姓 名  </strong> {{ user.name }}</p>
+                <p class="lead" style="color: white;"><strong>专 业  </strong> {{ user.major }}</p>
+                <p class="lead" style="color: white;"><strong>签 名  </strong> {{ user.status }}</p>
+            </ul>
+        </section>
+    </aside>
+    <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Welcome Back
+      </h1>
+        <ol class="breadcrumb">
+        <li><a href="/home/" name="tea_home"><i class="fa fa-dashboard"></i> Home</a></li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <div class="content container-fluid">
+		<div class="main-predict-function">
+                <br> <br>
+                <div class="function" style="border: lightgray ;background: linear-gradient(to top right, #f3f8ff, #deecff, #c6cfff);padding: 25px;">
+                    <p style="text-align: center">
+                                     我们将各科知识点联系起来，发现一些科目之间有一点的<strong>关联性</strong>
+                    </p>
+                    <p style="text-align: center">
+                                      通过您的高等数学、大学物理、线性代数预测你的<strong>离散数学的成绩</strong>
+                    </p>
+                </div>
+                <br> <br>
+                <!--成绩预测卡片-->
+                <div class="Card" id="div-card" style="float: right;border: lightgray ;background-color: #FFFFFF;padding: 10px">
+                    <!--下拉框板块-->
+                    <div class="dropdown" >
+                        <h1 style="font-family: 'Microsoft YaHei UI';font-size: 150%">
+                            预测科目:
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    离散数学
+                                </button>
+{#                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">#}
+{#                                    <a class="dropdown-item" id="dropdown-menu-Amath" href="#" role="tab">高等数学</a>#}
+{#                                    <a class="dropdown-item" id="dropdown-menu-Lalg" href="#" role="tab">线性代数</a>#}
+{#                                    <a class="dropdown-item" id="dropdown-menu-Uphy" href="#" role="tab">大学物理</a>#}
+{#                                    <a class="dropdown-item" id="dropdown-menu-Gai" href="#" role="tab">概率论</a>#}
+{#                                </div>#}
+                        </h1>
+                    </div>
+                    <!--卡片正文-->
+                    <div class="card-DiscreteMath" style="width:400px;height: 400px" align="center">
+                        <br> <br>
+                        <div class="card-body">
+                            <h5 class="card-title">ScorePredict Card</h5>
+                        </div>
+                        <ul class="list-group list-group-flush" >
+                            <li class="list-group-item">预测得分：{{ predictscore.score_predict }}</li>
+                            <li class="list-group-item">实际得分：{{ predictscore.score_actual }}</li>
+                            <li class="list-group-item">预测准确率：{{ predictscore.predict_accuracy_rating }}</li>
+                            <p class="card-text">加油，你是最棒的</p>
+                        </ul>
+                    </div>
+                </div>
+                <!--雷达图,暂时用柱状图代码放在这儿了-->
+                <div class="radar" id="div-radar" style="float: left;">
+                    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                    <div id="container" style="width: 500px;height:500px;"></div>
+                    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+                    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+                    <script type="text/javascript">
+                        var dom = document.getElementById("container");
+                        var myChart = echarts.init(dom);
+                        var app = {};
+                        option = null;
+                        option = {
+                            title: {
+                                text: '成绩预测雷达图'
+                            },
+                            tooltip: {
+                                trigger: 'axis'
+                            },
+                            legend: {
+                                x: 'center',
+                                data:['科目']
+                            },
+                            radar: [
+                                {
+                                    indicator: [
+                                        {text: '高数', max: 100},
+                                        {text: '离散', max: 100},
+                                        {text: '大物', max: 100},
+                                        {text: '线代', max: 100}
+                                        ],
+                                    center: ['50%','50%'],
+                                    radius:150
+                                },
+                                ],
+                            series: [
+                                {
+                                    type: 'radar',
+                                    tooltip: {
+                                        trigger: 'item'
+                                    },
+                                    itemStyle: {normal: {areaStyle: {type: 'default'}}},
+                                    data: [
+                                        {
+                                            value: [{{ user.Amath }},{{ predictscore.score_actual }},{{ user.Uphy }},{{ user.Lalg }}],
+                                            name: '科目'
+                                        }
+                                        ]
+                                },
+                                ]
+                        };
+                        ;
+                        if (option && typeof option === "object") {
+                            myChart.setOption(option, true);
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2019 <a href="#">Company</a>.</strong> All rights reserved.
+  </footer>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="../static/JS/adminlte.js"></script>
+</body>
+</html>

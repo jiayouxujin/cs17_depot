@@ -1,0 +1,251 @@
+<!doctype html>
+{% load staticfiles %}
+{% block css %}<link href="{% static 'CSS/AdminLTE.css' %}" rel="stylesheet"/>{% endblock %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/CSS/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/CSS/skin-blue.min.css">
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+    <!--div id="container" style="height: 100%"></div-->
+
+    <title>课程重点</title>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <header class="main-header">
+        <a class="logo" href="/home/">
+            <span class="logo-mini">
+                <b>个人中心</b>
+            </span>
+            <span class="logo-lg">
+                <b>个人中心</b>
+            </span>
+        </a>
+
+        {#        顶部导航栏#}
+        <nav class="navbar " role="navigation">
+            <img src="{% static "icon/nav_icon.png" %}" class="sidebar-toggle" data-toggle="push-menu" role="button">
+
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="{{ portrait }}" class="user-image" alt="User Image">
+                            <span class="hidden-xs">{{ user.name }}</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="user-header">
+                                <img src="{{ portrait }}" class="img-circle" alt="User Image">
+                                <p>{{ user.name }}</p>
+                            </li>
+
+                            <li class="user-footer">
+                                <div>
+                                    <a href="/login" class="btn btn-default btn-block">Sign out</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <aside class="main-sidebar">
+        <section class="sidebar">
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="{{ portrait }}" class="img-circle" alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <p>{{ user.name }}</p>
+                </div>
+            </div>
+
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="header" style="color: white">Welcome</li>
+                <p class="lead" style="color: white;"><strong>姓 名  </strong> {{ user.name }}</p>
+                <p class="lead" style="color: white;"><strong>专 业  </strong> {{ user.major }}</p>
+                <p class="lead" style="color: white;"><strong>签 名  </strong> {{ user.status }}</p>
+            </ul>
+        </section>
+    </aside>
+    <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Welcome Back
+      </h1>
+        <ol class="breadcrumb">
+        <li><a href="/home/" name="tea_home"><i class="fa fa-dashboard"></i> Home</a></li>
+      </ol>
+    </section>
+      <!--下拉框板块-->
+      <div class="dropdown" >
+                        <h1 style="font-family: 'Microsoft YaHei UI';font-size: 150%">
+                            课程重点之:
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    离散数学
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" id="dropdown-menu-Amath" href="#" role="tab">高等数学</a>
+                                    <a class="dropdown-item" id="dropdown-menu-Lalg" href="#" role="tab">线性代数</a>
+                                    <a class="dropdown-item" id="dropdown-menu-Uphy" href="#" role="tab">大学物理</a>
+                                    <a class="dropdown-item" id="dropdown-menu-Gai" href="#" role="tab">概率论</a>
+                                </div>
+                        </h1>
+                    </div>
+
+    <!-- Main content -->
+      <div id="container" style="width: 100%;height:700%;"></div>
+                 <script type="text/javascript">
+                    var dom = document.getElementById("container");
+                     var myChart = echarts.init(dom);
+                    var app = {};
+
+            app.title = '嵌套环形图';
+
+            option = {
+    tooltip: {
+        trigger: 'item',
+        formatter: "{a} <br/>{b}: {c} ({d}%)"
+    },
+    legend: {
+        orient: 'vertical',
+        x: 'left',
+        data:['命题', '联结词', '命题公式', '真值表', '命题公式分类', '等值式', '析取范式', '合取范式', '联结词的完备集', '可满足性问题与消解法', '推理的形式结构', '自然推理系统P', '消解证明法', '一阶逻辑命题符号化', '一阶逻辑公式及其解释', '一阶逻辑等值式与置换规则', '一阶逻辑前束范式', '一阶逻辑的推理理论', '集合的基本概念', '集合的运算', '有穷集的计数', '集合恒等式', '有序对与笛卡儿积', '二元关系', '关系的运算', '关系的性质', '关系的闭包', '等价关系与划分', '偏序关系', '函数的定义与性质', '函数的复合与反函数', '双射函数与集合的基数', '二元运算及其性质', '代数系统', '代数系统的同态与同构', '群的定义及性质', '子群与群的陪集分解', '循环群与置换群', '环与域', '格的定义与性质', '分配格、有补格与布尔代数', '图', '通路与回路', '图的连通性', '图的矩阵表示', '图的运算', '欧拉图', '哈密顿图', '无向树及其性质', '生成树', '根树及其应用', '平面图的基本概念', '欧拉公式', '平面图的判断', '平面图的对偶图']
+    },
+    series: [
+        {
+            name:'章节',
+            type:'pie',
+            selectedMode: 'single',
+            radius: [0, '35%'],
+
+            label: {
+                normal: {
+                    position: 'outer'
+                }
+            },
+            labelLine: {
+                normal: {
+                    show: true
+                }
+            },
+            data:[
+                {value:25,     name: '命题逻辑的基本概念'},
+				{value:13,     name: '命题逻辑等值演算'},
+				{value:9,     name: '命题逻辑的推理理论'},
+				{value:6,     name: '一阶逻辑基本概念'},
+                {value:9,     name: '一阶逻辑等值演算与推理'},
+                {value:12,     name: '集合代数'},
+                {value:23,     name: '二元关系'},
+                {value:9,     name: '函数'},
+                {value:7,     name: '代数系统'},
+                {value:18,     name: '群与环'},
+                {value:6,     name: '格与布尔代数'},
+                {value:21,     name: '图的基本概念'},
+                {value:11,     name: '欧拉图与哈密顿图'},
+                {value:12,     name: '树'},
+                {value:13,     name: '平面图'}
+            ]
+        },
+        {
+            name:'知识点',
+            type:'pie',
+            radius: ['60%', '68%'],
+            label: {
+                normal: {
+                    position: 'inner',
+                    show:false
+                }
+            },
+            data:[
+{value: 5, name: '命题'},
+{value: 7, name: '联结词'},
+{value: 5, name: '命题公式'},
+{value: 5, name: '真值表'},
+{value: 3, name: '命题公式分类'},
+{value: 5, name: '等值式'},
+{value: 1, name: '析取范式'},
+{value: 1, name: '合取范式'},
+{value: 3, name: '联结词的完备集'},
+{value: 3, name: '可满足性问题与消解法'},
+{value: 3, name: '推理的形式结构'},
+{value: 3, name: '自然推理系统P'},
+{value: 3, name: '消解证明法'},
+{value: 3, name: '一阶逻辑命题符号化'},
+{value: 3, name: '一阶逻辑公式及其解释'},
+{value: 3, name: '一阶逻辑等值式与置换规则'},
+{value: 3, name: '一阶逻辑前束范式'},
+{value: 3, name: '一阶逻辑的推理理论'},
+{value: 3, name: '集合的基本概念'},
+{value: 3, name: '集合的运算'},
+{value: 3, name: '有穷集的计数'},
+{value: 3, name: '集合恒等式'},
+{value: 3, name: '有序对与笛卡儿积'},
+{value: 1, name: '二元关系'},
+{value: 3, name: '关系的运算'},
+{value: 5, name: '关系的性质'},
+{value: 4, name: '关系的闭包'},
+{value: 3, name: '等价关系与划分'},
+{value: 4, name: '偏序关系'},
+{value: 3, name: '函数的定义与性质'},
+{value: 3, name: '函数的复合与反函数'},
+{value: 3, name: '双射函数与集合的基数'},
+{value: 3, name: '二元运算及其性质'},
+{value: 1, name: '代数系统'},
+{value: 3, name: '代数系统的同态与同构'},
+{value: 3, name: '群的定义及性质'},
+{value: 3, name: '子群与群的陪集分解'},
+{value: 3, name: '循环群与置换群'},
+{value: 9, name: '环与域'},
+{value: 3, name: '格的定义与性质'},
+{value: 3, name: '分配格、有补格与布尔代数'},
+{value: 5, name: '图'},
+{value: 3, name: '通路与回路'},
+{value: 3, name: '图的连通性'},
+{value: 5, name: '图的矩阵表示'},
+{value: 5, name: '图的运算'},
+{value: 5, name: '欧拉图'},
+{value: 6, name: '哈密顿图'},
+{value: 3, name: '无向树及其性质'},
+{value: 6, name: '生成树'},
+{value: 3, name: '根树及其应用'},
+{value: 3, name: '平面图的基本概念'},
+{value: 4, name: '欧拉公式'},
+{value: 3, name: '平面图的判断'},
+{value: 3, name: '平面图的对偶图'}
+
+            ]
+        }
+    ]
+};;
+if (option && typeof option === "object") {
+    myChart.setOption(option, false);}
+                   </script>
+                    </div>
+                </div>
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2019 <a href="#">Company</a>.</strong> All rights reserved.
+  </footer>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="../static/JS/adminlte.js"></script>
+</body>
+</html>

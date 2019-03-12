@@ -1,6 +1,6 @@
 {#login/templates/login/login.html#}
 {% load staticfiles %}
-{% block css %}<link href="{% static 'login.css' %}" rel="stylesheet"/>{% endblock %}
+{% block css %}<link href="{% static 'CSS/login.css' %}" rel="stylesheet"/>{% endblock %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,18 +9,18 @@
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <title>登录</title>
 </head>
-<body>
+<body style="background-image: url({% static "background_img/login_background.jpg"%})">
     <!--顶部导航栏-->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-white bg-blue fixed-top">
   <a class="navbar-brand" href="#">ScorePredict</a>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">首页 <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="#">首页 <span class="sr-only"></span></a>
       </li>
     </ul>
-      <button class="btn btn-outline-success" type="button" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">登 录</button>
+      <button class="btn btn-outline-success" type="button" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" >登 录</button>
   </div>
 </nav>
 
@@ -68,14 +68,14 @@
     <div class="container">
         <div class="header"></div>
         <div class="row">
-            <div class="col-sm-8">
-                <h2>Built for</h2>
-                <h2>students</h2>
-                <p>ScorePredict is a website inspired by student's needs.</p>
-                <p>Students can predict their course score and get some advice on review in this website.</p>
-                <p>It's a way to change your future.</p>
+             <div class="col-sm-8" style="color: #FFFFFF">
+                <h1>Built for</h1>
+                <h1>students</h1>
+                <p style="font-size: 20px">ScorePredict is a website inspired by student's needs.</p>
+                <p style="font-size: 20px">Students can predict their course score and get some advice on review in this website.</p>
+                <p style="font-size: 20px">It's a way to change your future.</p>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-4" style="background-color: #FFFFFF">
                 <form class='form-login' action="/login/" method="post">
                     {% if message %}
                         <div class="alert alert-warning">{{ message }}</div>

@@ -12,11 +12,11 @@ class Users(models.Model):
     portrait = models.ImageField(upload_to="static/user_portrait")
     mail = models.CharField(u"邮箱", max_length=100)
     status = models.CharField(u"状态/个性签名", max_length=255, null=True)
-    Uphy = models.CharField(u"大学物理", max_length=100, null=True)
-    Amath = models.CharField(u"高等数学", max_length=100, null=True)
-    Lalg = models.CharField(u"线性代数", max_length=100, null=True)
-    C = models.CharField(u"C语言", max_length=100, null=True)
-    Cpp = models.CharField(u"C++", max_length=100, null=True)
+    Uphy = models.FloatField(u"大学物理", max_length=100, null=True)
+    Amath = models.FloatField(u"高等数学", max_length=100, null=True)
+    Lalg = models.FloatField(u"线性代数", max_length=100, null=True)
+    C = models.FloatField(u"C语言", max_length=100, null=True)
+    Cpp = models.FloatField(u"C++", max_length=100, null=True)
 
 
 class Courses(models.Model):
