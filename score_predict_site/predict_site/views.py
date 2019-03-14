@@ -7,8 +7,8 @@ from predict_site.models import Users, StuScore
 from predict_site.form import UserForm
 from predict_site.models import Users, Courses
 from py2neo import Graph
-graph = Graph('http://localhost:7474', username='neo4j', password='123456')
 
+graph = Graph('http://localhost:7474', username='neo4j', password='123456')
 
 
 def home(request):
@@ -45,15 +45,20 @@ def login(request):
     login_form = UserForm()
     return render(request, 'login.html', locals())
 
+
 def scorepredict(request):
     user_logged = Users.objects.get(stu_no=request.session['user_stu_no'])
-    user_predictscore=StuScore.objects.get(stu_no=request.session['user_stu_no'])
+    user_predictscore = StuScore.objects.get(stu_no=request.session['user_stu_no'])
     return render(request, 'scorepredict.html',
-                  {'user': user_logged, 'portrait': '/static/user_portrait/portrait' + user_logged.stu_no + '.png','predictscore':user_predictscore})
+                  {'user': user_logged, 'portrait': '/static/user_portrait/portrait' + user_logged.stu_no + '.png',
+                   'predictscore': user_predictscore})
+
+
 def Classpoint_lisan(request):
     user_logged = Users.objects.get(stu_no=request.session['user_stu_no'])
     return render(request, 'Classpoint_lisan.html',
                   {'user': user_logged, 'portrait': '/static/user_portrait/portrait' + user_logged.stu_no + '.png'})
+
 
 # 以下两个函数是course_relevance查看关系所需,由course_relevance调用,无需写进urls.py中
 def build_nodes(neo_query):
@@ -142,7 +147,7 @@ def course_relevance(request):
     if request.method == "POST":
         course1 = request.POST.get('course1')
         course2 = request.POST.get('course2')
-        cypher_to_run = 'match p=(kcm1{description:"课程名"})-[:组成]-(zj1{description:"章节"})-[:组成]-(zsd1{description:"知识点"})-[:相关]-(zsd2{description:"知识点"})-[:组成]-(zj2{description:"章节"})-[:组成]-(kcm2{description:"课程名"}) where kcm1.name="'+course1+'" and kcm2.name="'+course2+'" return distinct p, kcm1, kcm2, zj1, zj2, zsd1, zsd2'
+        cypher_to_run = 'match p=(kcm1{description:"课程名"})-[:组成]-(zj1{description:"章节"})-[:组成]-(zsd1{description:"知识点"})-[:相关]-(zsd2{description:"知识点"})-[:组成]-(zj2{description:"章节"})-[:组成]-(kcm2{description:"课程名"}) where kcm1.name="' + course1 + '" and kcm2.name="' + course2 + '" return distinct p, kcm1, kcm2, zj1, zj2, zsd1, zsd2'
         relation_graph = graph.run(cypher_to_run).data()
         nodes = []
         edges = []
