@@ -1,149 +1,118 @@
 <!doctype html>
 {% load staticfiles %}
-{% block css %}<link href="{% static 'CSS/AdminLTE.css' %}" rel="stylesheet"/>{% endblock %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+
+<html lang="en" style="overflow-x: hidden;">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../static/CSS/font-awesome.min.css">
     <link rel="stylesheet" href="../static/CSS/skin-blue.min.css">
+    <title>ScorePredict-主页</title>
+  </head>
+  <body style="background-image: url('{% static "background_img/login_background.jpg" %}');overflow-x: hidden;">
 
-    <title>主页</title>
-</head>
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-    <header class="main-header">
-        <a class="logo">
-            <span class="logo-mini">
-                <b>个人中心</b>
-            </span>
-            <span class="logo-lg">
-                <b>个人中心</b>
-            </span>
-        </a>
-
-        {#        顶部导航栏#}
-        <nav class="navbar " role="navigation">
-            <img src="{% static "icon/nav_icon.png" %}" class="sidebar-toggle" data-toggle="push-menu" role="button">
-
-            <div class="navbar-custom-menu">
-                <ul class="nav navbar-nav">
-                    <li class="dropdown user user-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="{{ portrait }}" class="user-image" alt="User Image">
-                            <span class="hidden-xs">{{ user.name }}</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="user-header">
-                                <img src="{{ portrait }}" class="img-circle" alt="User Image">
-                                <p>{{ user.name }}</p>
-                            </li>
-
-                            <li class="user-footer">
-                                <div>
-                                    <a href="/login" class="btn btn-default btn-block">Sign out</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-
-    <aside class="main-sidebar">
-        <section class="sidebar">
-            <div class="user-panel">
-                <div class="pull-left image">
-                    <img src="{{ portrait }}" class="img-circle" alt="User Image">
-                </div>
-                <div class="pull-left info">
-                    <p>{{ user.name }}</p>
-                </div>
-            </div>
-
-            <ul class="sidebar-menu" data-widget="tree">
-                <li class="header" style="color: white">Welcome</li>
-                <p class="lead" style="color: white;"><strong>姓 名  </strong> {{ user.name }}</p>
-                <p class="lead" style="color: white;"><strong>专 业  </strong> {{ user.major }}</p>
-                <p class="lead" style="color: white;"><strong>签 名  </strong> {{ user.status }}</p>
-            </ul>
-        </section>
-    </aside>
-    <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Welcome Back
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#" name="tea_home"><i class="fa fa-dashboard"></i> Home</a></li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <div class="content container-fluid" style="padding-top: 100px">
-		<div class="col-md-4" style="text-align: center">
-			 <p>&nbsp;</p><a href="/scorepredict/"  style="color:black;text-decoration:none;">
-                        <div class="card-group">
-                            <div class="card" align="middle" style="border: lightgray;">
-                                <img src="{% static "icon/score_predict_icon.png" %}" class="card-img-top" alt="..." style="width: 100px;height: 100px">
-                                <div class="card-body">
-                                    <h5 class="card-title">成绩预测</h5>
-                                    <button type="button" class="btn btn-default">你有几科比较凉</button>
-                                </div>
-                            </div>
-                        </div></a>
-		</div>
-		<div class="col-md-4" style="text-align: center;">
-			<p>&nbsp;</p><a href="/course_relevance/"  style="color:black;text-decoration:none;">
-                        <div class="card-group">
-                            <div class="card" align="middle" style="background-color: rgba(0,0,0,0);border: none">
-                                <img src="{% static "icon/dependency_analyse_icon.png" %}" class="card-img-top" alt="..." style="width: 100px;height: 100px">
-                                <div class="card-body">
-                                    <h5 class="card-title">相关性分析</h5>
-                                    <button type="button" class="btn btn-default">你以为会不凉？？</button>
-                                </div>
-                            </div>
-                        </div></a>
-
-            <div style="padding: 20px"></div>
-            <p>&nbsp;</p><a href="/score/"  style="color:black;text-decoration:none;">
-                        <div class="card-group">
-                            <div class="card" align="middle" style="background-color: rgba(0,0,0,0);border: none">
-                                <img src="{% static "icon/course_socre_icon.png" %}" class="card-img-top" alt="..." style="width: 100px;height: 100px">
-                                <div class="card-body">
-                                    <h5 class="card-title">所修课程成绩</h5>
-                                    <button type="button" class="btn btn-default">已经凉了呀</button>
-                                </div>
-                            </div>
-                        </div></a>
-		</div>
-		<div class="col-md-4" style="text-align: center">
-              <p>&nbsp;</p><a href="/Classpoint_lisan/"  style="color:black;text-decoration:none;">
-                        <div class="card-group">
-                            <div class="card" align="middle" style="background-color: rgba(0,0,0,0);border: none">
-                                <img src="{% static "icon/course_key_icon.png" %}" class="card-img-top" alt="..." style="width: 100px;height: 100px">
-                                <div class="card-body">
-                                    <h5 class="card-title">课程重点</h5>
-                                    <button type="button" class="btn btn-default">按照这个复习就不凉了</button>
-                                </div>
-                            </div>
-                        </div></a>
-		</div>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">ScorePredict</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link active" href="#" style="">主页<span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="#">成绩预测</a>
+        <a class="nav-item nav-link" href="#">相关性分析</a>
+        <a class="nav-item nav-link" href="#">课程重点</a>
+        <a class="nav-item nav-link" href="#">已修课程</a>
+      </div>
     </div>
+
+    <span class="navbar-text" style="font-size: 18px;">
+        欢迎您，{{ user.name }}同学
+    </span>&nbsp;&nbsp;&nbsp;
+    <button class="btn btn-light" style="border-radius: 30px;background-color: rgba(0,0,0,0);color: #FFFFFF">退出</button>
+  </nav>
+
+   <div class="row">
+       <div class="col-2"></div>
+       <div class="col-8" style="background-color: rgba(0,0,0,0)">
+           <div class="jumbotron" style="background-color: rgba(0,0,0,0);">
+             <h1 class="display-5" style="color: #FFFFFF;text-align: center">ScorePredict-Student Version</h1>
+             <p class="lead" style="color: #FFFFFF;text-align: center">Students can predict their course score and get some advice on review in this website.</p>
+             <p style="color: #FFFFFF;text-align: center">It's a way to change your future.</p><br>
+               <div style="text-align: center"><a class="btn btn-light btn-lg" href="#" role="button" style="border-radius: 30px;background-color: rgba(0,0,0,0);color: #FFFFFF">CONTACT US</a></div>
+           </div>
+       </div>
+       <div class="col-2"></div>
+   </div>
+
+<div class="jumbotron jumbotron-fluid" style="background-color: rgba(255,255,255,1)">
+  <div class="container" style="background-color: rgba(255,255,255,0.1)">
+      <h1 class="display-4" style="text-align: center">FUNCTION<font style="color: #0d6aad">&nbsp;MENU</font></h1>
+    <p class="lead" style="text-align: center">You can use these functions below to help your study.</p><br>
   </div>
-  <footer class="main-footer">
-    <strong>Copyright &copy; 2019 <a href="#">Company</a>.</strong> All rights reserved.
-  </footer>
+    <div class="row">
+        <div class="col-2"></div>
+
+        <div class="col-2">
+            <a href="/scorepredict/"  style="color:black;text-decoration:none;">
+            <div class="card" style="width: 18rem;text-align: center;border: none">
+              <img  src="{% static "icon/score_predict_icon.png" %}" class="card-img-top" alt="..." style="width: 100px;height: 100px;margin: 0 auto;">
+              <div class="card-body" style="text-align: center;">
+                <h5 class="card-title">Score Predict</h5>
+                <p class="card-text">Predict in advance, adjust in time and change the future.</p>
+              </div>
+            </div></a>
+        </div>
+        <div class="col-2">
+            <a href="/course_relevance/"  style="color:black;text-decoration:none;">
+            <div class="card" style="width: 18rem;text-align: center;border: none">
+              <img  src="{% static "icon/dependency_analyse_icon.png" %}" class="card-img-top" alt="..." style="width: 100px;height: 100px;margin: 0 auto;">
+              <div class="card-body" style="text-align: center;">
+                <h5 class="card-title">Dependency Analyse</h5>
+                <p class="card-text">Discover the inner connections.</p>
+              </div>
+            </div></a>
+        </div>
+        <div class="col-2">
+            <a href="/Classpoint_lisan/"  style="color:black;text-decoration:none;">
+            <div class="card" style="width: 18rem;text-align: center;border: none">
+              <img  src="{% static "icon/course_key_icon.png" %}" class="card-img-top" alt="..." style="width: 100px;height: 100px;margin: 0 auto;">
+              <div class="card-body" style="text-align: center;">
+                <h5 class="card-title ;nav-item nav-link">Course Key</h5>
+                <p class="card-text">Focus in hands，high scores without worries.</p>
+              </div>
+            </div></a>
+        </div>
+        <div class="col-2">
+            <a href="/score/"  style="color:black;text-decoration:none;">
+            <div class="card" style="width: 18rem;text-align: center;border: none">
+              <img  src="{% static "icon/course_socre_icon.png" %}" class="card-img-top" alt="..." style="width: 100px;height: 100px;margin: 0 auto;">
+              <div class="card-body" style="text-align: center;">
+                <h5 class="card-title">Course Socre</h5>
+                <p class="card-text">Record the past，foreshadowing the future.</p>
+              </div>
+            </div></a>
+        </div>
+
+        <div class="col-2"></div>
+    </div>
+
 
 </div>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="../static/JS/adminlte.js"></script>
-</body>
+
+  <footer class="main-footer" style="color: #FEFFFE">
+    <strong>Copyright &copy; 2019 徐晋 张耀文 孙红利 宋雨秋.</strong> All rights reserved.
+  </footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="../static/JS/adminlte.js"></script>
+  </body>
 </html>
